@@ -23,13 +23,22 @@ shinyServer(function(input, output) {
     seq <-strsplit(as.character(getSeq(hg19, "chr17",start,start+length)),"")[[1]]
     
     df <- data.frame(pos=1:length(seq),letter=seq)
-    gg <- ggplot(df, aes(x=pos,y=1,fill=letter)) +geom_tile() + geom_vline(aes(xintercept=1:(length(seq))+0.5)) + scale_fill_manual(values=c("A" = "red","C"="blue","G"="yellow","T"="green")) + ggtitle(paste("Sequence of BRCA1 from ", start, "to", start + length))
+    gg <- ggplot(df, aes(x=pos,y=1,fill=letter)) +geom_tile(position="identity") 
+    gg <- gg + scale_fill_manual(values=c("A" = "red","C"="blue","G"="yellow","T"="green")) 
+    gg <- gg + ggtitle(paste("Sequence of BRCA1 from ", start, "to", start + length)) 
+    gg <- gg + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank()) 
+    breaks <- data.frame(xs = c(0.5, 1:(length(seq))+0.5))
+    gg <- gg + geom_vline(data=breaks, aes(xintercept=xs))
     
     gg
   
       
     
     nPerms <- input$choices
+    seqList <- NULL
+    diffList <- NULL
+    seqList[[1]] <- seq
+    diffList[[1]] <- 0
     
     for(i in 1:nPerms){
       #pick at random how many positions to change
@@ -37,9 +46,11 @@ shinyServer(function(input, output) {
       seq2 <- seq
       seq2[posToChange] <- sample(c("A","T","C","G"),length(posToChange),replace=TRUE)
       df <- rbind(df, data.frame(pos=1:length(seq),letter=seq2))
+      seqList[[i+1]] <- seq2
+      diffList[[i+1]] <- sum(seq != seq2)
     }
     
-    df$layout <- rep(sample(1:(nPerms+1)),each=length(seq))
+    df$Number <- rep(sample(1:(nPerms+1)),each=length(seq))
     
     # generate bins based on input$bins from ui.R
     #x    <- faithful[, 2]
@@ -47,11 +58,27 @@ shinyServer(function(input, output) {
 
     # draw the histogram with the specified number of bins
     #hist(x, breaks = bins, col = 'darkgray', border = 'white')
-    gg2 <- ggplot(df, aes(x=pos,y=1,fill=letter)) +geom_tile() + geom_vline(aes(xintercept=1:(length(seq))+0.5))+ scale_fill_manual(values=c("A" = "red","C"="blue","G"="yellow","T"="green")) + facet_wrap(~layout)
-    
+    gg2 <- ggplot(df, aes(x=pos,y=1,fill=letter)) +geom_tile() 
+#    gg2 <- gg2 + geom_vline(aes(xintercept=1:(length(seq))+0.5)) 
+    gg2 <- gg2 + scale_fill_manual(values=c("A" = "red","C"="blue","G"="yellow","T"="green")) 
+    gg2 <- gg2 + facet_wrap(~Number)
+    gg2 <- gg2 + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank()) 
+    breaks <- data.frame(xs = rep(c(0.5, 1:(length(seq))+0.5),nPerms))
+    gg2 <- gg2 + geom_vline(data=breaks, aes(xintercept=xs))
     gg2
-    
-    grid.arrange(gg,gg2)
-  })
 
+    out <- reactiveValues()
+    updateData <- function(){
+      out <- data.frame(Pattern = unlist(lapply(seqList,function(x) paste(x,collapse=""))), Difference = unlist(diffList), Number = unique(df$Number))
+    }
+    updateData()
+
+    grid.arrange(gg,gg2)
+    #gg
+    
+
+
+  })
+output$mytable <- renderDataTable(out)  
+  
 })

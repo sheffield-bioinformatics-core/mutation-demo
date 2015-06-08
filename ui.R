@@ -22,14 +22,17 @@ shinyUI(fluidPage(
                   value = 10),
       sliderInput("choices",
                   "Number of permutations:",
-                  min = 5,
+                  min =2,
                   max = 10,
                   value = 5)
     ),
 
     # Show a plot of the generated distribution
     mainPanel(
-      plotOutput("distPlot")
+      tabsetPanel(
+      tabPanel("Match the Patterns", plotOutput("distPlot")),
+      tabPanel("The patterns", dataTableOutput("mytable"))
+    )
     )
   )
 ))
