@@ -49,13 +49,14 @@ shinyServer(function(input, output) {
     out[[4]] <- diffList
     out
     
-    }
+  }
   )
   
   
   
   output$distPlot <- reactivePlot(function(){
-    
+    length<-10
+    nPerms  <- 5
     seq <- generate.sequence()[[1]]
     
     df <- data.frame(pos=1:length(seq),letter=seq)
@@ -70,29 +71,29 @@ shinyServer(function(input, output) {
     
     
     df <- generate.sequence()[[2]]
-
+    
     
     gg2 <- ggplot(df, aes(x=pos,y=1,fill=letter)) +geom_tile() 
-
+    
     gg2 <- gg2 + scale_fill_manual(values=c("A" = "red","C"="blue","G"="yellow","T"="green")) 
     gg2 <- gg2 + facet_wrap(~Number)
     gg2 <- gg2 + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank()) 
     breaks <- data.frame(xs = rep(c(0.5, 1:(length(seq))+0.5),nPerms))
     gg2 <- gg2 + geom_vline(data=breaks, aes(xintercept=xs))
     gg2
-        
-   grid.arrange(gg,gg2)
+    
+    grid.arrange(gg,gg2)
     
     
     
   })
   output$mytable <- renderDataTable({
-   df <- generate.sequence()[[2]]
-   seqList <- generate.sequence()[[3]]
-   diffList <- generate.sequence()[[4]]
-   out <- data.frame(Pattern = unlist(lapply(seqList,function(x) paste(x,collapse=""))), Difference = unlist(diffList), Number = unique(df$Number))
-   out
-     
+    df <- generate.sequence()[[2]]
+    seqList <- generate.sequence()[[3]]
+    diffList <- generate.sequence()[[4]]
+    out <- data.frame(Pattern = unlist(lapply(seqList,function(x) paste(x,collapse=""))), Difference = unlist(diffList), Number = unique(df$Number))
+    out
+    
   }
   )  
 })
