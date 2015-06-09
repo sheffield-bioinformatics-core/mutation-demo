@@ -32,6 +32,8 @@ shinyServer(function(input, output) {
     seqList[[1]] <- seq
     diffList[[1]] <- 0
     
+    maxChanges <- length(seq)*0.2
+      
     for(i in 1:nPerms){
       #pick at random how many positions to change
       posToChange <- sample(1:length(seq),sample(1:4,1))
@@ -90,6 +92,9 @@ shinyServer(function(input, output) {
   })
   
   output$mutationPlot <- reactivePlot(function(){
+    start <- 41196312
+    length<-10
+    nPerms  <- 5
     seq <- generate.sequence()[[1]]
     
     df <- data.frame(pos=1:length(seq),letter=seq)
