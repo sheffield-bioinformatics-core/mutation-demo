@@ -55,6 +55,8 @@ shinyServer(function(input, output) {
   
   
   output$distPlot <- reactivePlot(function(){
+    ##Seems like I have to define these defaults?
+    start <- 41196312
     length<-10
     nPerms  <- 5
     seq <- generate.sequence()[[1]]
