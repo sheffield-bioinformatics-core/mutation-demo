@@ -43,6 +43,7 @@ shinyServer(function(input, output) {
     }
     
     df$Number <- rep(sample(1:(nPerms+1)),each=length(seq))
+    df$Mutated <- do.call(c, lapply(seqList, function(x) x != seq))
     
     out[[2]] <- df
     out[[3]] <- seqList
@@ -85,10 +86,35 @@ shinyServer(function(input, output) {
     gg2
     
     grid.arrange(gg,gg2)
-    
-    
-    
+      
   })
+  
+  output$mutationPlot <- reactivePlot(function(){
+    seq <- generate.sequence()[[1]]
+    
+    df <- data.frame(pos=1:length(seq),letter=seq)
+    gg <- ggplot(df, aes(x=pos,y=1,fill=letter)) +geom_tile(position="identity") 
+    gg <- gg + scale_fill_manual(values=c("A" = "red","C"="blue","G"="yellow","T"="green")) 
+    gg <- gg + ggtitle(paste("Sequence of BRCA1 from ", start, "to", start + length)) 
+    gg <- gg + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank()) 
+    breaks <- data.frame(xs = c(0.5, 1:(length(seq))+0.5))
+    gg <- gg + geom_vline(data=breaks, aes(xintercept=xs))
+    
+    gg
+    
+    df <- generate.sequence()[[2]]
+    gg3 <- ggplot(df, aes(x=pos,y=1,fill=Mutated)) +geom_tile() 
+    
+    gg3 <- gg3 + scale_fill_manual(values=c("TRUE" = "black","FALSE"="white")) 
+    gg3 <- gg3 + facet_wrap(~Number)
+    gg3 <- gg3 + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank()) 
+    breaks <- data.frame(xs = rep(c(0.5, 1:(length(seq))+0.5),nPerms))
+    gg3 <- gg3 + geom_vline(data=breaks, aes(xintercept=xs))
+    
+    grid.arrange(gg,gg3)
+  
+    }
+  )
   output$mytable <- renderDataTable({
     df <- generate.sequence()[[2]]
     seqList <- generate.sequence()[[3]]

@@ -31,7 +31,7 @@ shinyUI(fluidPage(
     mainPanel(
       tabsetPanel(
       tabPanel("Match the Patterns", plotOutput("distPlot")),
-      tabPanel("The patterns", dataTableOutput("mytable"))
+      tabPanel("Mutations", plotOutput("mutationPlot"))
     )
     )
   )
