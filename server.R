@@ -67,7 +67,7 @@ shinyServer(function(input, output) {
     df <- data.frame(pos=1:length(seq),letter=seq)
     gg <- ggplot(df, aes(x=pos,y=1,fill=letter)) +geom_tile(position="identity") 
     gg <- gg + scale_fill_manual(values=c("A" = "red","C"="blue","G"="yellow","T"="green")) 
-    gg <- gg + ggtitle(paste("Sequence of BRCA1 from ", start, "to", start + length)) 
+    gg <- gg + ggtitle("Actual Code") 
     gg <- gg + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank()) 
     breaks <- data.frame(xs = c(0.5, 1:(length(seq))+0.5))
     gg <- gg + geom_vline(data=breaks, aes(xintercept=xs))
@@ -80,7 +80,7 @@ shinyServer(function(input, output) {
     
     gg2 <- ggplot(df, aes(x=pos,y=1,fill=letter)) +geom_tile() 
     
-    gg2 <- gg2 + scale_fill_manual(values=c("A" = "red","C"="blue","G"="yellow","T"="green")) 
+    gg2 <- gg2 + scale_fill_manual(values=c("A" = "red","C"="blue","G"="yellow","T"="green"))  + ggtitle("Which number matches the code above?")
     gg2 <- gg2 + facet_wrap(~Number)
     gg2 <- gg2 + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank()) 
     breaks <- data.frame(xs = rep(c(0.5, 1:(length(seq))+0.5),nPerms))
@@ -100,7 +100,7 @@ shinyServer(function(input, output) {
     df <- data.frame(pos=1:length(seq),letter=seq)
     gg <- ggplot(df, aes(x=pos,y=1,fill=letter)) +geom_tile(position="identity") 
     gg <- gg + scale_fill_manual(values=c("A" = "red","C"="blue","G"="yellow","T"="green")) 
-    gg <- gg + ggtitle(paste("Sequence of BRCA1 from ", start, "to", start + length)) 
+    gg <- gg + ggtitle("Actual Code") 
     gg <- gg + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank()) 
     breaks <- data.frame(xs = c(0.5, 1:(length(seq))+0.5))
     gg <- gg + geom_vline(data=breaks, aes(xintercept=xs))
@@ -110,7 +110,7 @@ shinyServer(function(input, output) {
     df <- generate.sequence()[[2]]
     gg3 <- ggplot(df, aes(x=pos,y=1,fill=Mutated)) +geom_tile() 
     
-    gg3 <- gg3 + scale_fill_manual(values=c("TRUE" = "black","FALSE"="white")) 
+    gg3 <- gg3 + scale_fill_manual(values=c("TRUE" = "black","FALSE"="white")) + ggtitle("Which number matches the code above?")
     gg3 <- gg3 + facet_wrap(~Number)
     gg3 <- gg3 + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank()) 
     breaks <- data.frame(xs = rep(c(0.5, 1:(length(seq))+0.5),nPerms))
