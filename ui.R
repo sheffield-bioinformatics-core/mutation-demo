@@ -23,8 +23,8 @@ shinyUI(fluidPage(
       sliderInput("choices",
                   "Number of permutations:",
                   min =2,
-                  max = 10,
-                  value = 3)
+                  max = 11,
+                  value = 3,step=2)
     ),
 
     # Show a plot of the generated distribution

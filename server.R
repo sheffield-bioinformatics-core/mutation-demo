@@ -18,7 +18,7 @@ shinyServer(function(input, output) {
     hg19 <- BSgenome.Hsapiens.UCSC.hg19
     
     start <- sample(41196312:41277500,1)
-    length <- input$length
+    length <- input$length  - 1
     
     seq <-strsplit(as.character(getSeq(hg19, "chr17",start,start+length)),"")[[1]]
     seq
