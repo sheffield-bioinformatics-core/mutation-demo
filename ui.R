@@ -22,7 +22,7 @@ shinyUI(fluidPage(
                   value = 5),
       sliderInput("choices",
                   "Number of permutations:",
-                  min =2,
+                  min =3,
                   max = 11,
                   value = 3,step=2)
     ),
