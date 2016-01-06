@@ -37,11 +37,11 @@ shinyUI(fluidPage(
                  helpText("You can use the 'slider' bars to increase the length of the sequence and to increase the number of alternative sequences you can choose from. Can you beat how long it takes the app to identify the correct sequence?"),
                  helpText("In reality, Cancer Research is performing experiments which investigate the human genome [3], which is about 3 Billion (3,000,000,000) letters in length, and we may have hundreds of millions of sequences to match up"),
                  helpText("Hopefully you will see how computers are extremely useful for this task!"),
-                 a("[1] Introduction to genetics",href="https://en.wikipedia.org/wiki/Introduction_to_genetics"),
+                 a("[1] Introduction to genetics",href="https://en.wikipedia.org/wiki/Introduction_to_genetics",target="_blank"),
                  br(),
-                 a("[2] The BRCA1 gene", href="https://en.wikipedia.org/wiki/BRCA1"),
+                 a("[2] The BRCA1 gene", href="https://en.wikipedia.org/wiki/BRCA1",target="_blank"),
                  br(),
-                 a("[3] The Human Genome", href="https://en.wikipedia.org/wiki/Human_genome")
+                 a("[3] The Human Genome", href="https://en.wikipedia.org/wiki/Human_genome",target="_blank")
                  
                  
                  

@@ -1,0 +1,24 @@
+---
+title: "Outline"
+author: "Mark Dunning"
+date: "6 January 2016"
+output: pdf_document
+---
+
+# Outline
+
+This activity explains what is meant by a DNA mutation, how we can detect them, and why computers and needed when looking for mutations on a genome-wide scale.
+
+All that is required is a laptop connected to the internet and a display. Through an internet browser, navigate to;
+
+http://bioinf-shiny001.cri.camres.org:3838/sequencer-matcher/
+
+The first page will show some background information to the activity. Clicking on ***Match the patterns*** will (after some delay) show a representation of a region of the BRCA1 gene. The DNA bases are colour-coded (A; red, G; yellow, C; blue and T;green). The web site will simulate a number of different permutations of the sequence that is displayed in the top panel. The goal is to determine which of the permuted sequences matches the original and where the mutations are. Clicking ***Show the Mutations*** will give the answer. 
+
+People can time how long it takes for them to identify "mutations" versus how long it takes the computer. The slide bar on the left increases the length of the sequence that is permuted, which can be used to increase the difficulty. Even when the sequence gets very "long", the computer can identify mutations also instantaneously whereas the human will struggle. 
+
+# Equipment
+
+- An Internet-connected laptop
+- TV or monitor
+- Poster with some background information (which the Brenton group already has maybe?)
