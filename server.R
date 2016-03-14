@@ -80,14 +80,14 @@ shinyServer(function(input, output) {
     } else gg <- ggplot(df, aes(x=pos,y=1,label=letter)) +geom_tile(position="identity",fill="white")
     
     
-    gg <- gg + scale_fill_manual(values=c("A" = "green","C"="blue","G"="yellow","T"="red")) 
+    gg <- gg + scale_fill_manual(values=c("A" = as.character(mypal[3]),"C"=as.character(mypal[2]),"G"=as.character(mypal[6]),"T"=as.character(mypal[1])))
     gg <- gg + facet_wrap(~Patient)
     
     if(useText) gg <- gg + geom_text()
     
     gg <- gg + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank(),panel.background =  element_blank()) 
     breaks <- data.frame(xs = c(0.5, 1:(length(seq))+0.5))
-    gg <- gg + geom_vline(data=breaks, aes(xintercept=xs))
+    gg <- gg + geom_vline(data=breaks, aes(xintercept=xs)) + xlab("")
     
     gg
     
@@ -100,11 +100,11 @@ shinyServer(function(input, output) {
     
     if(useText) gg2 <- gg2 + geom_text()
     
-    gg2 <- gg2 + scale_fill_manual(values=c("A" = "green","C"="blue","G"="yellow","T"="red"))  + ggtitle("Which patients show a mutation?")
+    gg2 <- gg2 + scale_fill_manual(values=c("A" = as.character(mypal[3]),"C"=as.character(mypal[2]),"G"=as.character(mypal[6]),"T"=as.character(mypal[1]))) + ggtitle("Which patients show a mutation?")
     gg2 <- gg2 + facet_wrap(~Patient,ncol=1)
     gg2 <- gg2 + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank(),panel.background =  element_blank())
     breaks <- data.frame(xs = rep(c(0.5, 1:(length(seq))+0.5),nPerms))
-    gg2 <- gg2 + geom_vline(data=breaks, aes(xintercept=xs))
+    gg2 <- gg2 + geom_vline(data=breaks, aes(xintercept=xs)) + xlab("")
     gg2
     
     grid.arrange(gg,gg2)
@@ -128,11 +128,11 @@ shinyServer(function(input, output) {
     
     if (useText) gg <- gg + geom_text()
     
-    gg <- gg + scale_fill_manual(values=c("A" = "green","C"="blue","G"="yellow","T"="red")) 
+    gg <- gg + scale_fill_manual(values=c("A" = as.character(mypal[3]),"C"=as.character(mypal[2]),"G"=as.character(mypal[6]),"T"=as.character(mypal[1])))
     gg <- gg + facet_wrap(~Patient)
     gg <- gg + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank(),panel.background =  element_blank()) + theme(legend.position="none")
     breaks <- data.frame(xs = c(0.5, 1:(length(seq))+0.5))
-    gg <- gg + geom_vline(data=breaks, aes(xintercept=xs))
+    gg <- gg + geom_vline(data=breaks, aes(xintercept=xs)) + xlab("")
     
     gg
     
@@ -143,11 +143,11 @@ shinyServer(function(input, output) {
     
     if(useText) gg3 <- gg3 + geom_text()
     
-    gg3 <- gg3 + scale_fill_manual(values=c("TRUE" = "deeppink","FALSE"="white")) + ggtitle("The computer will analyse the sequence and show any mutated positions in pink")
+    gg3 <- gg3 + scale_fill_manual(values=c("TRUE" = as.character(mypal[8]),"FALSE"="white")) + ggtitle("The computer will analyse the sequence and show any mutated positions in pink")
     gg3 <- gg3 + facet_wrap(~Patient,ncol=1)
     gg3 <- gg3 + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank(),panel.background =  element_blank()) + theme(legend.position="none")
     breaks <- data.frame(xs = rep(c(0.5, 1:(length(seq))+0.5),nPerms))
-    gg3 <- gg3 + geom_vline(data=breaks, aes(xintercept=xs))
+    gg3 <- gg3 + geom_vline(data=breaks, aes(xintercept=xs)) + xlab("")
     
     grid.arrange(gg,gg3)
   
