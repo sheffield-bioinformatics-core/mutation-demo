@@ -7,6 +7,11 @@
 
 library(shiny)
 
+library(RColorBrewer)
+
+mypal <- brewer.pal(9,"Set1")
+names(mypal) <- c("red","blue","green","purple","orange","yellow","brown","pink","grey")
+
 shinyServer(function(input, output) {
   
   
@@ -26,7 +31,7 @@ shinyServer(function(input, output) {
     out[[1]] <- seq
     
     df <- data.frame(pos=1:length(seq),letter=seq)
-    nPerms <- input$choices
+    nPerms <- input$choices - 1 
     seqList <- NULL
     diffList <- NULL
     seqList[[1]] <- seq
@@ -45,6 +50,7 @@ shinyServer(function(input, output) {
     }
     
     df$Number <- rep(sample(1:(nPerms+1)),each=length(seq))
+    df$Patient <- paste0("Patient",df$Number)
     df$Mutated <- do.call(c, lapply(seqList, function(x) x != seq))
     
     out[[2]] <- df
@@ -64,11 +70,22 @@ shinyServer(function(input, output) {
     nPerms  <- 5
     seq <- generate.sequence()[[1]]
     
-    df <- data.frame(pos=1:length(seq),letter=seq)
-    gg <- ggplot(df, aes(x=pos,y=1,fill=letter)) +geom_tile(position="identity") 
-    gg <- gg + scale_fill_manual(values=c("A" = "red","C"="blue","G"="yellow","T"="green")) 
-    gg <- gg + ggtitle("Actual Code") 
-    gg <- gg + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank()) 
+    df <- data.frame(pos=1:length(seq),letter=seq,Patient="Human Genome")
+    
+    useColour <- ifelse(input$useColour == "Yes",TRUE,FALSE)
+    useText <- ifelse(input$useText == "Yes",TRUE,FALSE)
+    
+    if(useColour){
+    gg <- ggplot(df, aes(x=pos,y=1,fill=letter,label=letter)) +geom_tile(position="identity") 
+    } else gg <- ggplot(df, aes(x=pos,y=1,label=letter)) +geom_tile(position="identity",fill="white")
+    
+    
+    gg <- gg + scale_fill_manual(values=c("A" = "green","C"="blue","G"="yellow","T"="red")) 
+    gg <- gg + facet_wrap(~Patient)
+    
+    if(useText) gg <- gg + geom_text()
+    
+    gg <- gg + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank(),panel.background =  element_blank()) 
     breaks <- data.frame(xs = c(0.5, 1:(length(seq))+0.5))
     gg <- gg + geom_vline(data=breaks, aes(xintercept=xs))
     
@@ -77,12 +94,15 @@ shinyServer(function(input, output) {
     
     df <- generate.sequence()[[2]]
     
+    if(useColour){
+      gg2 <- ggplot(df, aes(x=pos,y=1,fill=letter,label=letter)) +geom_tile() 
+    } else   gg2 <- ggplot(df, aes(x=pos,y=1,label=letter)) +geom_tile(fill="white")
     
-    gg2 <- ggplot(df, aes(x=pos,y=1,fill=letter)) +geom_tile() 
+    if(useText) gg2 <- gg2 + geom_text()
     
-    gg2 <- gg2 + scale_fill_manual(values=c("A" = "red","C"="blue","G"="yellow","T"="green"))  + ggtitle("Which number matches the code above?")
-    gg2 <- gg2 + facet_wrap(~Number)
-    gg2 <- gg2 + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank()) 
+    gg2 <- gg2 + scale_fill_manual(values=c("A" = "green","C"="blue","G"="yellow","T"="red"))  + ggtitle("Which patients show a mutation?")
+    gg2 <- gg2 + facet_wrap(~Patient,ncol=1)
+    gg2 <- gg2 + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank(),panel.background =  element_blank())
     breaks <- data.frame(xs = rep(c(0.5, 1:(length(seq))+0.5),nPerms))
     gg2 <- gg2 + geom_vline(data=breaks, aes(xintercept=xs))
     gg2
@@ -97,22 +117,35 @@ shinyServer(function(input, output) {
     nPerms  <- 5
     seq <- generate.sequence()[[1]]
     
-    df <- data.frame(pos=1:length(seq),letter=seq)
-    gg <- ggplot(df, aes(x=pos,y=1,fill=letter)) +geom_tile(position="identity") 
-    gg <- gg + scale_fill_manual(values=c("A" = "red","C"="blue","G"="yellow","T"="green")) 
-    gg <- gg + ggtitle("Actual Code") 
-    gg <- gg + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank()) 
+    useColour <- ifelse(input$useColour == "Yes",TRUE,FALSE)
+    useText <- ifelse(input$useText == "Yes",TRUE,FALSE)
+    
+    df <- data.frame(pos=1:length(seq),letter=seq,Patient="Human Genome")
+    if(useColour){
+      gg <- ggplot(df, aes(x=pos,y=1,fill=letter,label=letter)) +geom_tile(position="identity") 
+    }
+    else gg <- ggplot(df, aes(x=pos,y=1,label=letter)) +geom_tile(position="identity",fill="white")
+    
+    if (useText) gg <- gg + geom_text()
+    
+    gg <- gg + scale_fill_manual(values=c("A" = "green","C"="blue","G"="yellow","T"="red")) 
+    gg <- gg + facet_wrap(~Patient)
+    gg <- gg + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank(),panel.background =  element_blank()) + theme(legend.position="none")
     breaks <- data.frame(xs = c(0.5, 1:(length(seq))+0.5))
     gg <- gg + geom_vline(data=breaks, aes(xintercept=xs))
     
     gg
     
     df <- generate.sequence()[[2]]
-    gg3 <- ggplot(df, aes(x=pos,y=1,fill=Mutated)) +geom_tile() 
     
-    gg3 <- gg3 + scale_fill_manual(values=c("TRUE" = "black","FALSE"="white")) + ggtitle("Which number matches the code above?")
-    gg3 <- gg3 + facet_wrap(~Number)
-    gg3 <- gg3 + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank()) 
+    
+    gg3 <- ggplot(df, aes(x=pos,y=1,fill=Mutated,label=letter)) +geom_tile() 
+    
+    if(useText) gg3 <- gg3 + geom_text()
+    
+    gg3 <- gg3 + scale_fill_manual(values=c("TRUE" = "deeppink","FALSE"="white")) + ggtitle("The computer will analyse the sequence and show any mutated positions in pink")
+    gg3 <- gg3 + facet_wrap(~Patient,ncol=1)
+    gg3 <- gg3 + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank(),panel.background =  element_blank()) + theme(legend.position="none")
     breaks <- data.frame(xs = rep(c(0.5, 1:(length(seq))+0.5),nPerms))
     gg3 <- gg3 + geom_vline(data=breaks, aes(xintercept=xs))
     

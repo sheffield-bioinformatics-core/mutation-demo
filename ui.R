@@ -10,7 +10,7 @@ library(shiny)
 shinyUI(fluidPage(
 
   # Application title
-  titlePanel("Simple Sequence Matcher"),
+  titlePanel("Detecting DNA mutations: Demo"),
 
   # Sidebar with a slider input for number of bins
   sidebarLayout(
@@ -21,10 +21,12 @@ shinyUI(fluidPage(
                   max = 100,
                   value = 5),
       sliderInput("choices",
-                  "Number of permutations:",
-                  min =3,
-                  max = 11,
-                  value = 3,step=2)
+                  "Number of Patients:",
+                  min =2,
+                  max = 4,
+                  value = 2,step=1),
+      radioButtons("useColour","Colour each position?",choices=c("Yes","No"),selected = "Yes"),
+      radioButtons("useText","Show letters?",choices=c("Yes","No"),selected="No")
     ),
 
     # Show a plot of the generated distribution
@@ -46,8 +48,8 @@ shinyUI(fluidPage(
                  
                  
         ),
-      tabPanel("Match the Patterns", plotOutput("distPlot")),
-      tabPanel("Show the Mutations", plotOutput("mutationPlot")),
+      tabPanel("Analyse the Patients", plotOutput("distPlot")),
+      tabPanel("Ask the Computer", plotOutput("mutationPlot")),
       
       tabPanel("About us....",helpText("This app was developed by Mark Dunning and Elke Van Oudenhove of Cancer Research Uk Cambridge Institute"),
                                        img(src="cruk-cambridge-institute.jpg",width=350,height=77), br(),a("cruk.cam.ac.uk",href="www.cruk.cam.ac.uk"),
