@@ -23,7 +23,7 @@ shinyUI(fluidPage(
       sliderInput("choices",
                   "Number of Patients:",
                   min =2,
-                  max = 4,
+                  max = 6,
                   value = 2,step=1),
       radioButtons("useColour","Colour each position?",choices=c("Yes","No"),selected = "Yes"),
       radioButtons("useText","Show letters?",choices=c("Yes","No"),selected="No")
@@ -48,10 +48,10 @@ shinyUI(fluidPage(
                  
                  
         ),
-      tabPanel("Analyse the Patients", plotOutput("distPlot")),
-      tabPanel("Ask the Computer", plotOutput("mutationPlot")),
+      tabPanel("Analyse the Patients", plotOutput("distPlot",height=800)),
+      tabPanel("Ask the Computer", plotOutput("mutationPlot",height=800)),
       
-      tabPanel("About us....",helpText("This app was developed by Mark Dunning and Elke Van Oudenhove of Cancer Research Uk Cambridge Institute"),
+      tabPanel("About us....",helpText("This app was developed by Mark Dunning, Ania Piskorz and Elke Van Oudenhove of Cancer Research Uk Cambridge Institute"),
                                        img(src="cruk-cambridge-institute.jpg",width=350,height=77), br(),a("cruk.cam.ac.uk",href="www.cruk.cam.ac.uk"),
                                       br(),
                                       a("View source Code", href="https://github.com/markdunning/sequencer-matcher")

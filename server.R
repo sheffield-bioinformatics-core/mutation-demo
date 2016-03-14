@@ -71,7 +71,7 @@ shinyServer(function(input, output) {
     seq <- generate.sequence()[[1]]
     
     df <- data.frame(pos=1:length(seq),letter=seq,Patient="Human Genome")
-    
+    df$letter <- factor(df$letter, levels= c("A","C","G","T"))
     useColour <- ifelse(input$useColour == "Yes",TRUE,FALSE)
     useText <- ifelse(input$useText == "Yes",TRUE,FALSE)
     
@@ -93,6 +93,7 @@ shinyServer(function(input, output) {
     
     
     df <- generate.sequence()[[2]]
+    df$letter <- factor(df$letter, levels= c("A","C","G","T"))
     
     if(useColour){
       gg2 <- ggplot(df, aes(x=pos,y=1,fill=letter,label=letter)) +geom_tile() 
@@ -121,6 +122,8 @@ shinyServer(function(input, output) {
     useText <- ifelse(input$useText == "Yes",TRUE,FALSE)
     
     df <- data.frame(pos=1:length(seq),letter=seq,Patient="Human Genome")
+    df$letter <- factor(df$letter, levels= c("A","C","G","T"))
+    
     if(useColour){
       gg <- ggplot(df, aes(x=pos,y=1,fill=letter,label=letter)) +geom_tile(position="identity") 
     }
@@ -137,7 +140,7 @@ shinyServer(function(input, output) {
     gg
     
     df <- generate.sequence()[[2]]
-    
+    df$letter <- factor(df$letter, levels= c("A","C","G","T"))
     
     gg3 <- ggplot(df, aes(x=pos,y=1,fill=Mutated,label=letter)) +geom_tile() 
     
