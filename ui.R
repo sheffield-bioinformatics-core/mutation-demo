@@ -53,8 +53,8 @@ shinyUI(fluidPage(
                  
                  
         ),
-      tabPanel("Analyse the Patients", plotOutput("distPlot")),
-      tabPanel("Ask the Computer", plotOutput("mutationPlot")),
+      tabPanel("Analyse the Patients", plotOutput("distPlot",height=750)),
+      tabPanel("Ask the Computer", plotOutput("mutationPlot",height=750)),
       
       tabPanel("About us....",helpText("This app was developed by Mark Dunning, Ania Piskorz and Elke Van Oudenhove of Cancer Research Uk Cambridge Institute"),
                                        img(src="cruk-cambridge-institute.jpg",width=350,height=77), br(),a("cruk.cam.ac.uk",href="www.cruk.cam.ac.uk"),
