@@ -26,7 +26,8 @@ shinyUI(fluidPage(
                   max = 4,
                   value = 2,step=1),
       radioButtons("useColour","Colour each position?",choices=c("Yes","No"),selected = "Yes"),
-      radioButtons("useText","Show letters?",choices=c("Yes","No"),selected="No")
+      radioButtons("useText","Show letters?",choices=c("Yes","No"),selected="No"),
+      helpText("Poly(ADP-ribose) polymerase inhibitor (PARPi) have shown promising activity in patients with BRCA1/2 mutation-associated (BRCA1/2MUT+) ovarian and breast cancers. PARPi blocks an enzyme used to repair breaks in DNA. Tumour cells with BRCA1/2 deficiency (caused by mutation and loosing the normal copy of the gene) are highly sensitive to PARPi which activity lead to accumulation of double stranded DNA breaks that are normally repaired by homologous recombination. The homologous recombination process is conduced by functional BRCA1/2 proteins. Therefore tumour cells with defective homologous recombination, such as those lacking BRCA1 or BRCA2, are killed by PARP inhibitors, whereas normal cells are relatively unaffected (as they remain one normal functional copy of BRCA1/2 genes). PARP inhibitors can then be used as a different therapeutic strategy for the treatment of tumors that lack BRCA function, due to germline BRCA1/2 mutations, somatic BRCA1/2 mutations and other defects in homologous repair pathway. Several PARPi have entered clinical trials and show promising activity in breast, ovarian and other cancers associated with BRCA1/2 mutations or other defects in homologous recombination DNA repair. ")
     ),
 
     # Show a plot of the generated distribution
