@@ -23,7 +23,7 @@ shinyUI(fluidPage(
       sliderInput("choices",
                   "Number of Patients:",
                   min =2,
-                  max = 4,
+                  max = 6,
                   value = 2,step=1),
       radioButtons("useColour","Colour each position?",choices=c("Yes","No"),selected = "Yes"),
       radioButtons("useText","Show letters?",choices=c("Yes","No"),selected="No")
