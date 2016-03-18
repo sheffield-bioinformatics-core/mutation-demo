@@ -40,14 +40,23 @@ shinyUI(fluidPage(
                  helpText("In reality, Cancer Research is performing experiments which investigate the human genome [3], which is about 3 Billion (3,000,000,000) letters in length, and we may have hundreds of millions of sequences to match up"),
                  helpText("Hopefully you will see how computers are extremely useful for this task!"),
                  h2("Why is mutation detection in BRCA1 so important?"),
-                 helpText("Poly(ADP-ribose) polymerase inhibitor (PARPi) [4] have shown promising activity in patients with BRCA1/2 mutation-associated (BRCA1/2MUT+) ovarian and breast cancers. PARPi blocks an enzyme used to repair breaks in DNA. Tumour cells with BRCA1/2 deficiency (caused by mutation and loosing the normal copy of the gene) are highly sensitive to PARPi which activity lead to accumulation of double stranded DNA breaks that are normally repaired by homologous recombination. The homologous recombination process is conduced by functional BRCA1/2 proteins. Therefore tumour cells with defective homologous recombination, such as those lacking BRCA1 or BRCA2, are killed by PARP inhibitors, whereas normal cells are relatively unaffected (as they remain one normal functional copy of BRCA1/2 genes). PARP inhibitors can then be used as a different therapeutic strategy for the treatment of tumors that lack BRCA function, due to germline BRCA1/2 mutations, somatic BRCA1/2 mutations and other defects in homologous repair pathway. Several PARPi have entered clinical trials and show promising activity in breast, ovarian and other cancers associated with BRCA1/2 mutations or other defects in homologous recombination DNA repair."),
+                 helpText("PARP inhibitor drug [4]was found to be effective in ovarian and breast cancers patients with mutations in BRCA1/2 genes. PARPi drug blocks an enzyme that is used to repair DNA damages. Cancer cells in patients with BRCA1/2 mutations have problems with fixing DNA breaks already and PARPi drug make that worse. As normal cells in BRCA1/2 carriers have one working copy of BRCA1/2 genes they remain. PARP inhibitor can then be used as a different therapeutic strategy for the treatment of tumors that lack BRCA function. Several PARPi have entered clinical trials and show promising activity in breast, ovarian and other cancers associated with BRCA1/2 mutations or other defects in DNA repair system (homologous recombination DNA repair). 
+"),
                  a("[1] Introduction to genetics",href="https://en.wikipedia.org/wiki/Introduction_to_genetics",target="_blank"),
                  br(),
                  a("[2] The BRCA1 gene", href="https://en.wikipedia.org/wiki/BRCA1",target="_blank"),
                  br(),
                  a("[3] The Human Genome", href="https://en.wikipedia.org/wiki/Human_genome",target="_blank"),
                  br(),
-                 a("[4] The PARP Inhibitor",href="https://en.wikipedia.org/wiki/PARP_inhibitor")
+                 a("[4] The PARP Inhibitor",href="https://en.wikipedia.org/wiki/PARP_inhibitor",target="_blank"),
+                 helpText("Youtube videos"),
+                 a("What is DNA and How Does it Work? ",href="https://www.youtube.com/watch?v=zwibgNGe4aY",target="_blank"),
+                 br(),
+                 a("What is a Mutation?",href="https://www.youtube.com/watch?v=K4FeRP6LdoA",target="_blank"),
+                 br(),
+                 a("Mutation and How Cancer Develops | Cancer Research UK ",href="https://www.youtube.com/watch?v=8BJ8_5Gyhg8",target="_blank"),
+                 br(),
+                 a("18 Things You Should Know About Genetics",href="https://www.youtube.com/watch?v=bVk0twJYL6Y",target="_blank")
                 
                  
                  
