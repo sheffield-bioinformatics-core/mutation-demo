@@ -1,10 +1,3 @@
-
-# This is the user-interface definition of a Shiny web application.
-# You can find out more about building applications with Shiny here:
-#
-# http://shiny.rstudio.com
-#
-
 library(shiny)
 
 shinyUI(fluidPage(
@@ -19,12 +12,12 @@ shinyUI(fluidPage(
                   "Length of Sequence:",
                   min = 5,
                   max = 100,
-                  value = 5),
+                  value = 15),
       sliderInput("choices",
                   "Number of Patients:",
-                  min =2,
+                  min = 2,
                   max = 6,
-                  value = 2,step=1),
+                  value = 2, step = 1),
       radioButtons("useColour","Colour each position?",choices=c("Yes","No"),selected = "Yes"),
       radioButtons("useText","Show letters?",choices=c("Yes","No"),selected="No")
     ),
