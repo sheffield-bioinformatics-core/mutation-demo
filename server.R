@@ -3,9 +3,12 @@ library(RColorBrewer)
 library(ggplot2)
 library(gridExtra)
 
-mypal <- brewer.pal(9,"Set1")
-names(mypal) <- c("red","blue","green","purple","orange","yellow","brown","pink","grey")
+#mypal <- brewer.pal(9,"Set1")
+#names(mypal) <- c("red","blue","green","purple","orange","yellow","brown","pink","grey")
 
+mypal <- c("#009FDA","#1F145D","#F9E300","#009B48", "#BED600","#D10074","#D52B1E")
+
+  
 cat("Loading BRCA1 sequence\n")
 load('brca1seq.RData')
 
@@ -68,7 +71,7 @@ shinyServer(function(input, output) {
     } else gg <- ggplot(df, aes(x=pos,y=1,label=letter)) +geom_tile(position="identity",fill="white")
 
 
-    gg <- gg + scale_fill_manual(values=c("A" = as.character(mypal[3]),"C"=as.character(mypal[2]),"G"=as.character(mypal[6]),"T"=as.character(mypal[1])), drop = FALSE)
+    gg <- gg + scale_fill_manual(values=c("A" = as.character(mypal[4]),"C"=as.character(mypal[1]),"G"=as.character(mypal[3]),"T"=as.character(mypal[7])), drop = FALSE)
     gg <- gg + facet_wrap(~Patient)
 
     if(useText) gg <- gg + geom_text()
@@ -89,7 +92,7 @@ shinyServer(function(input, output) {
 
     if(useText) gg2 <- gg2 + geom_text()
 
-    gg2 <- gg2 + scale_fill_manual(values=c("A" = as.character(mypal[3]),"C"=as.character(mypal[2]),"G"=as.character(mypal[6]),"T"=as.character(mypal[1]))) + ggtitle("Which patients show a mutation?")
+    gg2 <- gg2 + scale_fill_manual(values=c("A" = as.character(mypal[4]),"C"=as.character(mypal[1]),"G"=as.character(mypal[3]),"T"=as.character(mypal[7]))) + ggtitle("Which patients show a mutation?")
     gg2 <- gg2 + facet_wrap(~Patient,ncol=1)
     gg2 <- gg2 + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank(),panel.background =  element_blank()) + theme(legend.position = "none")
     breaks <- data.frame(xs = rep(c(0.5, 1:(length(seq))+0.5),nPerms))
@@ -119,7 +122,7 @@ shinyServer(function(input, output) {
 
     if (useText) gg <- gg + geom_text()
 
-    gg <- gg + scale_fill_manual(values=c("A" = as.character(mypal[3]),"C"=as.character(mypal[2]),"G"=as.character(mypal[6]),"T"=as.character(mypal[1])), drop = FALSE)
+    gg <- gg + scale_fill_manual(values=c("A" = as.character(mypal[4]),"C"=as.character(mypal[1]),"G"=as.character(mypal[3]),"T"=as.character(mypal[7])), drop = FALSE)
     gg <- gg + facet_wrap(~Patient)
     gg <- gg + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank(),panel.background =  element_blank()) + theme(legend.position = "top", legend.title = element_blank())
     breaks <- data.frame(xs = c(0.5, 1:(length(seq))+0.5))
@@ -134,7 +137,7 @@ shinyServer(function(input, output) {
 
     if(useText) gg3 <- gg3 + geom_text()
 
-    gg3 <- gg3 + scale_fill_manual(values=c("TRUE" = as.character(mypal[8]),"FALSE"="white")) + ggtitle("The computer will analyse the sequence and show any mutated positions in pink")
+    gg3 <- gg3 + scale_fill_manual(values=c("TRUE" = as.character(mypal[6]),"FALSE"="white")) + ggtitle("The computer will analyse the sequence and show any mutated positions in pink")
     gg3 <- gg3 + facet_wrap(~Patient,ncol=1)
     gg3 <- gg3 + theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank(),panel.background =  element_blank()) + theme(legend.position = "none")
     breaks <- data.frame(xs = rep(c(0.5, 1:(length(seq))+0.5),nPerms))

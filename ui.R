@@ -19,7 +19,8 @@ shinyUI(fluidPage(
                   max = 6,
                   value = 2, step = 1),
       radioButtons("useColour","Colour each position?",choices=c("Yes","No"),selected = "Yes"),
-      radioButtons("useText","Show letters?",choices=c("Yes","No"),selected="No")
+      radioButtons("useText","Show letters?",choices=c("Yes","No"),selected="No"),
+      img(src="TUOS_PRIMARY_LOGO_FULL COLOUR + KEYLINE.png",width="100%")
     ),
 
     # Show a plot of the generated distribution
@@ -30,7 +31,7 @@ shinyUI(fluidPage(
                  helpText("The app will generate various alternative versions of the sequence, and your task is to work out which alternative matches the original sequences.
                         You can also try and spot where the errors ('mutations') are in the other sequences. Clicking the 'Show the Mutations' tab will ask the app to work out where the mutations are."),
                  helpText("You can use the 'slider' bars to increase the length of the sequence and to increase the number of patients to analyse. Can you beat how long it takes the app to identify the correct sequence?"),
-                 helpText("In reality, Cancer Research is performing experiments which investigate the human genome [3], which is about 3 Billion (3,000,000,000) letters in length, and we may have hundreds of millions of sequences to match up"),
+                 helpText("In reality, researchers are performing experiments which investigate the human genome [3], which is about 3 Billion (3,000,000,000) letters in length, and we may have hundreds of millions of sequences to match up"),
                  helpText("Hopefully you will see how computers are extremely useful for this task!"),
                  h2("Why is mutation detection in BRCA1 so important?"),
                  helpText("PARP inhibitor drug [4]was found to be effective in ovarian and breast cancers patients with mutations in BRCA1/2 genes. PARPi drug blocks an enzyme that is used to repair DNA damages. Cancer cells in patients with BRCA1/2 mutations have problems with fixing DNA breaks already and PARPi drug make that worse. As normal cells in BRCA1/2 carriers have one working copy of BRCA1/2 genes they remain. PARP inhibitor can then be used as a different therapeutic strategy for the treatment of tumors that lack BRCA function. Several PARPi have entered clinical trials and show promising activity in breast, ovarian and other cancers associated with BRCA1/2 mutations or other defects in DNA repair system (homologous recombination DNA repair). 
@@ -58,7 +59,7 @@ shinyUI(fluidPage(
       tabPanel("Analyse the Patients", plotOutput("distPlot",height=750)),
       tabPanel("Ask the Computer", plotOutput("mutationPlot",height=750)),
       
-      tabPanel("About us....",helpText("This app was developed by Mark Dunning, Ania Piskorz and Elke Van Oudenhove of Cancer Research Uk Cambridge Institute"),
+      tabPanel("Acknowledgements...",helpText("This app was developed by Mark Dunning, Ania Piskorz and Elke Van Oudenhove of Cancer Research Uk Cambridge Institute"),
                                        img(src="cruk-cambridge-institute.jpg",width=350,height=77), br(),a("cruk.cam.ac.uk",href="www.cruk.cam.ac.uk"),
                                       br(),
                                       a("View source Code", href="https://github.com/markdunning/sequencer-matcher")
